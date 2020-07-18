@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8a3f7d9-0ced-4dcc-ac4c-f8e8396d089e">
+	<property name="ireport.zoom" value="1.6105100000000054"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="74"/>
+	<parameter name="TglAwal" class="java.lang.String"/>
+	<parameter name="TglAkhir" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     detailpinjam.`kode_buku` AS detailpinjam_kode_buku,
+     detailpinjam.`status` AS detailpinjam_status,
+     pinjam.`NoPinjam` AS pinjam_NoPinjam,
+     pinjam.`TglPinjam` AS pinjam_TglPinjam,
+     pinjam.`NoAnggota` AS pinjam_NoAnggota,
+     buku.`judul` AS buku_judul,
+     anggota.`Nama` AS anggota_Nama
+FROM
+     `pinjam` pinjam INNER JOIN `detailpinjam` detailpinjam ON pinjam.`NoPinjam` = detailpinjam.`NoPinjam`
+     INNER JOIN `buku` buku ON detailpinjam.`kode_buku` = buku.`kode_buku`
+     INNER JOIN `anggota` anggota ON pinjam.`NoAnggota` = anggota.`NoAnggota`
+
+WHERE (Pinjam.TglPinjam>=$P{TglAwal}) and (Pinjam.TglPinjam<=$P{TglAkhir})]]>
+	</queryString>
+	<field name="detailpinjam_kode_buku" class="java.lang.String"/>
+	<field name="detailpinjam_status" class="java.lang.String"/>
+	<field name="pinjam_NoPinjam" class="java.lang.String"/>
+	<field name="pinjam_TglPinjam" class="java.sql.Date"/>
+	<field name="pinjam_NoAnggota" class="java.lang.String"/>
+	<field name="buku_judul" class="java.lang.String"/>
+	<field name="anggota_Nama" class="java.lang.String"/>
+	<variable name="no" class="java.lang.String"/>
+	<group name="pinjam_NoPinjam">
+		<groupExpression><![CDATA[$F{pinjam_NoPinjam}]]></groupExpression>
+		<groupHeader>
+			<band height="90">
+				<staticText>
+					<reportElement x="60" y="11" width="87" height="20" uuid="ee216c7c-416f-426c-8ce2-a11c598851d8"/>
+					<textElement>
+						<font fontName="Poppins SemiBold" size="13"/>
+					</textElement>
+					<text><![CDATA[No Pinjam]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="43" width="87" height="20" uuid="57bad9a2-c81a-4274-a47d-073057aef48c"/>
+					<textElement>
+						<font fontName="Poppins SemiBold" size="13"/>
+					</textElement>
+					<text><![CDATA[Tgl Pinjam]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="312" y="11" width="87" height="20" uuid="92592b86-f64f-4dba-9d3a-3feea72af3f9"/>
+					<textElement>
+						<font fontName="Poppins SemiBold" size="13"/>
+					</textElement>
+					<text><![CDATA[No Anggota]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="312" y="43" width="87" height="20" uuid="f4012e5f-546b-4dfa-9f4c-726cbd9d8ce5"/>
+					<textElement>
+						<font fontName="Poppins SemiBold" size="13"/>
+					</textElement>
+					<text><![CDATA[Nama]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="147" y="11" width="100" height="20" uuid="04922bb0-2675-4705-a12a-fe5c54476bc5"/>
+					<textElement>
+						<font fontName="Poppins Medium" size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pinjam_NoPinjam}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="147" y="43" width="100" height="20" uuid="c2487f6c-4c5e-46a9-a2f0-882290658c5f"/>
+					<textElement>
+						<font fontName="Poppins Medium" size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pinjam_TglPinjam}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="399" y="11" width="100" height="20" uuid="4751ae7a-61fb-4820-b62a-692e35b65a4d"/>
+					<textElement>
+						<font fontName="Poppins Medium" size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pinjam_NoAnggota}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="399" y="43" width="100" height="20" uuid="3ddde180-00a0-4aab-ba2f-e822426cd150"/>
+					<textElement>
+						<font fontName="Poppins Medium" size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{anggota_Nama}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="85" y="70" width="100" height="20" forecolor="#333333" backcolor="#3366FF" uuid="89d82bad-f71f-49bc-8f58-b2dfb1d39253"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="185" y="70" width="239" height="20" forecolor="#333333" backcolor="#3366FF" uuid="d77b9aea-b6ff-455d-8701-9a33193ea90b"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="424" y="70" width="100" height="20" forecolor="#333333" backcolor="#3366FF" uuid="5461947d-29bf-4838-9456-86d56506bb04"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="85" y="70" width="100" height="20" forecolor="#FFFFFF" uuid="63da3e61-ced0-4afa-bf00-fb711364edea"/>
+					<textElement textAlignment="Center">
+						<font fontName="Poppins SemiBold" size="12"/>
+					</textElement>
+					<text><![CDATA[Kode Buku]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="185" y="70" width="239" height="20" forecolor="#FFFFFF" uuid="34977135-cf27-46d2-892e-657b6efa2d07"/>
+					<textElement textAlignment="Center">
+						<font fontName="Poppins SemiBold" size="12"/>
+					</textElement>
+					<text><![CDATA[Judul Buku]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="424" y="70" width="100" height="20" forecolor="#FFFFFF" uuid="d1298be3-bde3-4e73-925a-3f5e1e514f83"/>
+					<textElement textAlignment="Center">
+						<font fontName="Poppins SemiBold" size="12"/>
+					</textElement>
+					<text><![CDATA[Status]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="37" y="70" width="48" height="20" forecolor="#333333" backcolor="#3366FF" uuid="3a6c5fe6-7b89-4aee-bdf9-bc97a15b099d"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="37" y="70" width="48" height="20" forecolor="#FFFFFF" uuid="05c560fd-582c-4546-bcda-4af3925d859a"/>
+					<textElement textAlignment="Center">
+						<font fontName="Poppins SemiBold" size="12"/>
+					</textElement>
+					<text><![CDATA[No]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-20" width="596" height="115" backcolor="#201950" uuid="5181ecd4-1ca5-461e-8a86-9ff0667a0729"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="-11" width="457" height="62" forecolor="#FFFFFF" uuid="fb2d5391-62e8-4371-ac3a-6e8537be7b4a"/>
+				<textElement>
+					<font fontName="Poppins SemiBold" size="40"/>
+				</textElement>
+				<text><![CDATA[LAPORAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="41" width="414" height="33" forecolor="#FFFFFF" uuid="75c5ef98-1485-4e1f-970d-728d48d13f3a"/>
+				<textElement>
+					<font fontName="Poppins SemiBold" size="20"/>
+				</textElement>
+				<text><![CDATA[PEMINJAMAN PERPUSTAKAAN UNIKOM]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="64" splitType="Stretch">
+			<rectangle>
+				<reportElement x="185" y="0" width="239" height="20" uuid="d0cb4d88-4dca-408c-86ad-d282e8dc7af0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="424" y="0" width="100" height="20" uuid="f45bdf76-55e8-49ff-8efe-a3d3a5167864"/>
+			</rectangle>
+			<textField>
+				<reportElement x="196" y="0" width="228" height="20" uuid="e7337b1a-a5ec-42b9-9545-3f0401fe129d"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_judul}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="0" width="100" height="20" uuid="2db9d384-d762-4fcd-afe5-c156582686fd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{detailpinjam_status}.equals("0") ? "Blm Kembali" : "Sdh Kembali")]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="85" y="0" width="100" height="20" uuid="b81c9940-e6f6-4bac-97f3-fe88cbab3b44"/>
+			</rectangle>
+			<textField>
+				<reportElement x="85" y="0" width="100" height="20" uuid="e5a0ffe6-2fab-43fe-a981-2a8218a1db4d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailpinjam_kode_buku}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="45" width="555" height="2" forecolor="#FFFFFF" backcolor="#999999" uuid="2fb71da3-7901-4c2f-a580-c2ef14addee2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="37" y="0" width="48" height="20" uuid="9b958b17-8ad4-4c60-85c8-95f53bbc5f3b"/>
+			</rectangle>
+			<textField>
+				<reportElement x="37" y="0" width="48" height="20" uuid="28049a49-5fb6-4953-9e9c-4250cef2629a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pinjam_NoPinjam_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="19" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="47" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="0" width="596" height="47" backcolor="#000033" uuid="34109e25-34c3-4251-b57c-b1260f2b39fc"/>
+			</rectangle>
+			<textField>
+				<reportElement x="435" y="15" width="80" height="20" forecolor="#FFFFFF" uuid="d8589089-ba3e-4ba2-9e38-6bbedf57c555"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="15" width="40" height="20" forecolor="#FFFFFF" uuid="6f3447f5-d782-4bac-92e6-91d7601e90e7"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="15" width="100" height="20" forecolor="#FFFFFF" uuid="d8227cb5-9c9e-48cd-885b-7a488e32858c"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

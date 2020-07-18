@@ -1,0 +1,2168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://jasperreports.sourceforge.net/jasperreports"
+  xmlns:jr="http://jasperreports.sourceforge.net/jasperreports"
+  elementFormDefault="qualified">
+
+ <element name="jasperReport">
+  <annotation>
+   <documentation>Root element representing the definition of a report.</documentation>
+  </annotation>
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element name="propertyExpression" type="jr:datasetPropertyExpressionType" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:import" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:template" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:reportFont" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:style" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:subDataset" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:scriptlet" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:parameter" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:queryString" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:field" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:sortField" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:variable" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:filterExpression" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:group" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:background" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:title" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:pageHeader" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:columnHeader" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:detail" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:columnFooter" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:pageFooter" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:lastPageFooter" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:summary" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:noData" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="name" type="string" use="required">
+   	<annotation>
+   		<documentation>Name of the report.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="language" type="string" use="optional" default="java">
+   	<annotation>
+   		<documentation>Specifies the language used for the report expressions.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="columnCount" type="NMTOKEN" use="optional" default="1">
+   	<annotation>
+   		<documentation>Number of columns on the report.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="printOrder" use="optional" default="Vertical">
+   	<annotation>
+   		<documentation>Columns filling order.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Vertical">
+	   	<annotation>
+	   		<documentation>Columns on the report are filled vertically.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="Horizontal">
+	   	<annotation>
+	   		<documentation>Columns on the report are filled horizontally.</documentation>
+	   	</annotation>
+      </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="columnDirection" use="optional" default="LTR">
+   	<annotation>
+   		<documentation>Columns filling direction.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="LTR">
+	   	<annotation>
+	   		<documentation>Columns on the report are filled from left to right.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="RTL">
+	   	<annotation>
+	   		<documentation>Columns on the report are filled from right to left.</documentation>
+	   	</annotation>
+      </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="pageWidth" type="NMTOKEN" use="optional" default="595">
+   	<annotation>
+   		<documentation>Page width.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="pageHeight" type="NMTOKEN" use="optional" default="842">
+   	<annotation>
+   		<documentation>Page height.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="orientation" use="optional" default="Portrait">
+   	<annotation>
+   		<documentation>Page printing orientation.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Portrait">
+	   	<annotation>
+	   		<documentation>Portrait page layout.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="Landscape">
+	   	<annotation>
+	   		<documentation>Landscape page layout.</documentation>
+	   	</annotation>
+      </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="whenNoDataType" use="optional">
+   	<annotation>
+   		<documentation>Allows users to customize the behavior of the reporting engine when there are now rows in the data source.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="NoPages">
+	   	<annotation>
+	   		<documentation>The generated document contains zero pages.</documentation>
+	   	</annotation>
+	  </enumeration>      
+      <enumeration value="BlankPage">
+	   	<annotation>
+	   		<documentation>The generated document contains one blank page.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="AllSectionsNoDetail">
+	   	<annotation>
+	   		<documentation>All the report sections except the detail section will get printed.</documentation>
+	   	</annotation>
+	  </enumeration>
+      <enumeration value="NoDataSection">
+	   	<annotation>
+	   		<documentation>The generated document contains only the noData section.</documentation>
+	   	</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="sectionType" use="optional" default="Band">
+   	<annotation>
+   		<documentation>Specifies if the report design is made of sections containing bands or containing parts.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Band">
+	   	<annotation>
+	   		<documentation>The report template is made of sections containing bands.</documentation>
+	   	</annotation>
+	  </enumeration>      
+      <enumeration value="Part">
+	   	<annotation>
+	   		<documentation>The report template is made of sections containing parts.</documentation>
+	   	</annotation>
+      </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="columnWidth" type="NMTOKEN" use="optional" default="555">
+   	<annotation>
+   		<documentation>Column width.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="columnSpacing" type="NMTOKEN" use="optional" default="0">
+   	<annotation>
+   		<documentation>Space between columns.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="leftMargin" type="NMTOKEN" use="optional" default="20">
+   	<annotation>
+   		<documentation>Left margin.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="rightMargin" type="NMTOKEN" use="optional" default="20">
+   	<annotation>
+   		<documentation>Right margin.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="topMargin" type="NMTOKEN" use="optional" default="30">
+   	<annotation>
+   		<documentation>Top margin.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="bottomMargin" type="NMTOKEN" use="optional" default="30">
+   	<annotation>
+   		<documentation>Bottom margin.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="isTitleNewPage" use="optional" default="false">
+   	<annotation>
+   		<documentation>Flag used to specify if the title section should be printed on a separate initial page.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	   	<annotation>
+	   		<documentation>Title section will be printed on a separate initial page</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="false">
+	   	<annotation>
+	   		<documentation>Title section will be printed on the first page of the report, along with the other sections.</documentation>
+	   	</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isSummaryNewPage" use="optional" default="false">
+   	<annotation>
+   		<documentation>Flag used to specify if the summary section should be printed on a separate last page.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	   	<annotation>
+	   		<documentation>Summary section will be printed on a separate last page.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="false">
+	   	<annotation>
+	   		<documentation>Summary section will be printed on the last page of the report, along with the other sections, if there is enough space.</documentation>
+	   	</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isSummaryWithPageHeaderAndFooter" use="optional" default="false">
+   	<annotation>
+   		<documentation>Flag used to specify if the summary section should be accompanied by the page header and footer.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	   	<annotation>
+	   		<documentation>Summary section will be printed along with the page header and footer.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="false">
+	   	<annotation>
+	   		<documentation>Summary section will be printed without page header and footer.</documentation>
+	   	</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isFloatColumnFooter" use="optional" default="false">
+   	<annotation>
+   		<documentation>Flag used to specify if the column footer section should be printed at the bottom of the column or if it should immediately follow the last detail or group footer printed on the current column.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	   	<annotation>
+	   		<documentation>The column footer section is printed immediately after the last detail or group footer printed on the current column.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="false">
+	   	<annotation>
+	   		<documentation>The column footer section is printed at the bottom of the current column.</documentation>
+	   	</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="scriptletClass" type="string" use="optional">
+   	<annotation>
+   		<documentation>Indicates which class implements the scriptlets functionality for this report. The specified class must be a subclass of <code>JRAbstractScriptlet</code> class. If omitted, an instance of <code>JRDefaultScriptlet</code> will be created.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="resourceBundle" type="string" use="optional">
+   	<annotation>
+   		<documentation>The base name of the report associated resource bundle.</documentation>
+   	</annotation>
+   </attribute>
+   <attribute name="whenResourceMissingType" use="optional" default="Null">
+   	<annotation>
+   		<documentation>Allows customizing the way the engine deals with missing resources in the resource bundle.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Null">
+	   	<annotation>
+	   		<documentation>Null is returned for the missing resource.</documentation>
+	   	</annotation>
+	  </enumeration>
+      <enumeration value="Empty">
+	   	<annotation>
+	   		<documentation>An empty string is returned for the missing resource.</documentation>
+	   	</annotation>
+	  </enumeration>
+      <enumeration value="Key">
+	   	<annotation>
+	   		<documentation>The key is returned for the missing resources.</documentation>
+	   	</annotation>
+	  </enumeration>
+      <enumeration value="Error">
+	   	<annotation>
+	   		<documentation>An exception is thrown when the resource with the specified key is missing.</documentation>
+	   	</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isIgnorePagination" use="optional" default="false">
+   	<annotation>
+   		<documentation>Flag used to specify whether to use pagination.
+	  <p/>
+	  This attribute can be overridden at fill time by the IS_IGNORE_PAGINATION parameter.</documentation>
+   	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	   	<annotation>
+	   		<documentation>The report will be generated on one long page.  The specified page height will still be used for report design.</documentation>
+	   	</annotation>
+      </enumeration>
+      <enumeration value="false">
+	   	<annotation>
+	   		<documentation>The report will be paginated according to the pageHeight attribute.</documentation>
+	   	</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="formatFactoryClass" type="string" use="optional">
+	 <annotation>
+	   <documentation>Specifies the name of the class implementing the <code>net.sf.jasperreports.engine.util.FormatFactory</code> interface to use with this report. If omitted, an instance of <code>net.sf.jasperreports.engine.util.DefaultFormatFactory</code> will be created.</documentation>
+	 </annotation>
+   </attribute>
+   <attribute name="uuid" type="string" use="optional">
+	<annotation>
+	 <documentation>This attribute is auto-generated and is used to uniquely identify JRXMLs.</documentation>
+	</annotation>
+   </attribute>  
+  </complexType>
+ </element>
+
+ <element name="property">
+  <annotation>
+   <documentation>Allows the creation of a name-value pair property for a report object (e.g. the report itself, a field, a parameter, etc).</documentation>
+  </annotation>
+  <complexType>
+   <attribute name="name" type="string" use="required">
+	<annotation>
+	 <documentation>Name of the object property.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="value" type="string" use="optional">
+	<annotation>
+	 <documentation>Value of the object property.</documentation>
+	</annotation>
+   </attribute>
+  </complexType>
+ </element>
+
+ <complexType name="propertyExpressionType" mixed="true">
+  <attribute name="name" type="string" use="required">
+   <annotation>
+	<documentation>Name of the object property.</documentation>
+   </annotation>
+  </attribute>
+ </complexType>
+
+ <element name="propertyExpression" type="jr:propertyExpressionType">
+  <annotation>
+   <documentation>Allows the creation of a dynamic name-value pair property for a report element.
+  The contents of this element is interpreted as a <code>java.lang.String</code> expression,
+  which will be evaluated at fill time, the result being used as property value.</documentation>
+  </annotation>
+ </element>
+
+ <complexType name="datasetPropertyExpressionType" mixed="true">
+  <complexContent>
+    <extension base="jr:propertyExpressionType">
+     <attribute name="evaluationTime" use="optional">
+  	  <annotation>
+   	   <documentation>Specifies when the default value expression of a parameter is evaluated.</documentation>
+  	  </annotation>  
+      <simpleType>
+       <restriction base="string">
+        <enumeration value="Early">
+	     <annotation>
+	   	  <documentation>Evaluate the property expression before parameter contributors.</documentation>
+	  	 </annotation>  
+        </enumeration>
+        <enumeration value="Late">
+	  	 <annotation>
+	   	  <documentation>Evaluate the property expression after parameter contributors.</documentation>
+	  	 </annotation>  
+        </enumeration>
+        <enumeration value="Report">
+	  	 <annotation>
+	   	  <documentation>Evaluate the property expression at the end of the report.</documentation>
+	  	 </annotation>  
+        </enumeration>
+       </restriction>
+      </simpleType>
+     </attribute>
+    </extension>
+  </complexContent>
+ </complexType>
+
+ <element name="import">
+  <annotation>
+   <documentation>Translates into an import statement inside the expression class order to eliminate the need to use complete class names in the report expressions.</documentation>
+  </annotation>
+  <complexType>
+   <attribute name="value" type="string" use="required">
+	<annotation>
+	 <documentation>Class name or package to import.</documentation>
+	</annotation>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="template">
+  <annotation>
+   <documentation>A style template (*.jrtx file/<a href="http://jasperreports.sourceforge.net/api/net/sf/jasperreports/engine/JRTemplate.html">JRTemplate</a> instance) included in a report.
+    The contents of this element is interpreted as an expression which is resolved to a style template at fill time.
+   </documentation>
+  </annotation>
+  <complexType mixed="true">
+   <attribute name="class" use="optional" default="java.lang.String">
+	<annotation>
+	 <documentation>Class for the style template source expression.</documentation>
+	</annotation>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="reportFont">
+  <annotation>
+   <documentation>Represents the definition of a report font. Report fonts are used as default or base font settings in other font definitions throughout the report.</documentation>
+  </annotation>  
+  <complexType>
+   <attribute name="name" type="string" use="required">
+	<annotation>
+	 <documentation>Name of the report font definition.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="isDefault" use="optional" default="false">
+	<annotation>
+	 <documentation>The default report font is used as base font for all the font definitions that do not explicitly reference a report font definition.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="fontName" type="string" use="optional">
+	<annotation>
+	 <documentation>Name of the font.</documentation>
+	</annotation>
+   </attribute>   
+   <attribute name="size" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>Size of the font.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="isBold" use="optional">
+	<annotation>
+	 <documentation>Flag indicating if the font weight is bold</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isItalic" use="optional">
+	<annotation>
+	 <documentation>Flag indicating if the font is italic</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isUnderline" use="optional">
+	<annotation>
+	 <documentation>Flag indicating if the font is underlined</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isStrikeThrough" use="optional">
+	<annotation>
+	 <documentation>Flag indicating if the font is strikethrough</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="pdfFontName" type="string" use="optional">
+	<annotation>
+	 <documentation>Name of the PDF font.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="pdfEncoding" type="string" use="optional">
+	<annotation>
+	 <documentation>Encoding type to use with the PDF font.</documentation>
+	</annotation>
+   </attribute>   
+   <attribute name="isPdfEmbedded" use="optional">
+	<annotation>
+	 <documentation>Specifies if the PDF font should be embedded in the document.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="style">
+  <annotation>
+   <documentation>Definition of a report style.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:pen" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:box" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:paragraph" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:conditionalStyle" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+   <attribute name="name" type="string" use="optional">
+	<annotation>
+	 <documentation>Name of the report style definition.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="isDefault" use="optional">
+	<annotation>
+	 <documentation>The default report style is used as base style for all the elements that do not explicitly reference a report style definition.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="style" type="string" use="optional">
+	<annotation>
+	 <documentation>Parent style reference.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="mode" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Opaque"/>
+      <enumeration value="Transparent"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="forecolor" type="string" use="optional"/>
+   <attribute name="backcolor" type="string" use="optional"/>
+   <attribute name="pen" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>pen</elem>.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None"/>
+      <enumeration value="Thin"/>
+      <enumeration value="1Point"/>
+      <enumeration value="2Point"/>
+      <enumeration value="4Point"/>
+      <enumeration value="Dotted"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="fill" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Solid"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="radius" type="NMTOKEN" use="optional"/>
+   <attribute name="scaleImage" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Clip"/>
+      <enumeration value="FillFrame"/>
+      <enumeration value="RetainShape"/>
+      <enumeration value="RealHeight"/>
+      <enumeration value="RealSize"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="hAlign" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Left"/>
+      <enumeration value="Center"/>
+      <enumeration value="Right"/>
+      <enumeration value="Justified"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="hTextAlign" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Left"/>
+      <enumeration value="Center"/>
+      <enumeration value="Right"/>
+      <enumeration value="Justified"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="hImageAlign" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Left"/>
+      <enumeration value="Center"/>
+      <enumeration value="Right"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="vAlign" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Top"/>
+      <enumeration value="Middle"/>
+      <enumeration value="Bottom"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="vTextAlign" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Top"/>
+      <enumeration value="Middle"/>
+      <enumeration value="Bottom"/>
+      <enumeration value="Justified"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="vImageAlign" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Top"/>
+      <enumeration value="Middle"/>
+      <enumeration value="Bottom"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="border" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None"/>
+      <enumeration value="Thin"/>
+      <enumeration value="1Point"/>
+      <enumeration value="2Point"/>
+      <enumeration value="4Point"/>
+      <enumeration value="Dotted"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="borderColor" type="string" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>   
+   <attribute name="padding" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>   
+   <attribute name="topBorder" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None"/>
+      <enumeration value="Thin"/>
+      <enumeration value="1Point"/>
+      <enumeration value="2Point"/>
+      <enumeration value="4Point"/>
+      <enumeration value="Dotted"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="topBorderColor" type="string" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="topPadding" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="leftBorder" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None"/>
+      <enumeration value="Thin"/>
+      <enumeration value="1Point"/>
+      <enumeration value="2Point"/>
+      <enumeration value="4Point"/>
+      <enumeration value="Dotted"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="leftBorderColor" type="string" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="leftPadding" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="bottomBorder" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None"/>
+      <enumeration value="Thin"/>
+      <enumeration value="1Point"/>
+      <enumeration value="2Point"/>
+      <enumeration value="4Point"/>
+      <enumeration value="Dotted"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="bottomBorderColor" type="string" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="bottomPadding" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="rightBorder" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None"/>
+      <enumeration value="Thin"/>
+      <enumeration value="1Point"/>
+      <enumeration value="2Point"/>
+      <enumeration value="4Point"/>
+      <enumeration value="Dotted"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="rightBorderColor" type="string" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="rightPadding" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by tag <elem>box</elem>.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="rotation" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None"/>
+      <enumeration value="Left"/>
+      <enumeration value="Right"/>
+      <enumeration value="UpsideDown"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="lineSpacing" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Single"/>
+      <enumeration value="1_1_2"/>
+      <enumeration value="Double"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isStyledText" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by attribute <code>markup</code>.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="markup" type="string" use="optional"/>
+   <attribute name="fontName" type="string" use="optional"/>
+   <attribute name="fontSize" type="NMTOKEN" use="optional"/>
+   <attribute name="isBold" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isItalic" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isUnderline" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isStrikeThrough" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="pdfFontName" type="string" use="optional"/>
+   <attribute name="pdfEncoding" type="string" use="optional"/>
+   <attribute name="isPdfEmbedded" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="pattern" type="string" use="optional"/>
+   <attribute name="isBlankWhenNull" use="optional">
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="pen">
+  <annotation>
+   <documentation>Groups the properties of the pen used to draw lines or borders.</documentation>
+  </annotation>  
+  <complexType>
+   <attribute name="lineWidth" type="NMTOKEN" use="optional">
+  	<annotation>
+   	 <documentation>The line width of the pen.</documentation>
+  	</annotation>  
+   </attribute>
+   <attribute name="lineStyle" use="optional">
+  	<annotation>
+   	 <documentation>The line style of the pen.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Solid">
+  		<annotation>
+   	 	 <documentation>Solid line.</documentation>
+  		</annotation>  
+      </enumeration>
+      <enumeration value="Dashed">
+  		<annotation>
+   	 	 <documentation>Dashed line.</documentation>
+  		</annotation>  
+      </enumeration>
+      <enumeration value="Dotted">
+  		<annotation>
+   	 	 <documentation>Dotted line.</documentation>
+  		</annotation>  
+      </enumeration>
+      <enumeration value="Double">
+  		<annotation>
+   	 	 <documentation>Double line.</documentation>
+  		</annotation>  
+      </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="lineColor" type="string" use="optional">
+  	<annotation>
+   	 <documentation>The line color of the pen.</documentation>
+  	</annotation>  
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="paragraph">
+  <annotation>
+   <documentation>Paragraph properties for text elements.</documentation>
+  </annotation>
+  <complexType>
+   <sequence>
+    <element ref="jr:tabStop" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+   <attribute name="lineSpacing" use="optional">
+    <annotation>
+     <documentation>Type of line spacing for the text object.</documentation>
+    </annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Single">
+		<annotation>
+		 <documentation>Normal line spacing</documentation>
+		</annotation>
+	  </enumeration>
+      <enumeration value="1_1_2">
+		<annotation>
+		 <documentation>Medium line spacing.</documentation>
+		</annotation>
+	  </enumeration>
+      <enumeration value="Double">
+		<annotation>
+		 <documentation>Double line spacing</documentation>
+		</annotation>
+	  </enumeration>
+      <enumeration value="AtLeast">
+		<annotation>
+		 <documentation>Line spacing is at least the amount specified by lineSpacingSize.</documentation>
+		</annotation>
+	  </enumeration>
+      <enumeration value="Fixed">
+		<annotation>
+		 <documentation>Line spacing is exactly as specified bye lineSpacingSize.</documentation>
+		</annotation>
+	  </enumeration>
+      <enumeration value="Proportional">
+		<annotation>
+		 <documentation>Line spacing is normal line spacing multiplied by lineSpacingSize.</documentation>
+		</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="lineSpacingSize" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>The line spacing size to be used in combination with the line spacing type.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="firstLineIndent" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>The indent of the first line of text.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="leftIndent" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>The left indent of text.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="rightIndent" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>The right indent of text.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="spacingBefore" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>The spacing before text.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="spacingAfter" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>The spacing after text.</documentation>
+	</annotation>
+   </attribute>
+   <attribute name="tabStopWidth" type="NMTOKEN" use="optional">
+	<annotation>
+	 <documentation>The tab stop width of the text.</documentation>
+	</annotation>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="tabStop">
+  <annotation>
+   <documentation>Custom tab stop definition.</documentation>
+  </annotation>
+  <complexType>
+   <attribute name="alignment" use="optional">
+    <annotation>
+	 <documentation>The alignment of the custom tab stop.</documentation>
+    </annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Left">
+		<annotation>
+		 <documentation>Left aligned tab stop.</documentation>
+		</annotation>
+	  </enumeration>
+      <enumeration value="Center">
+		<annotation>
+		 <documentation>Center aligned tab stop.</documentation>
+		</annotation>
+	  </enumeration>
+      <enumeration value="Right">
+		<annotation>
+		 <documentation>Right aligned tab stop.</documentation>
+		</annotation>
+	  </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="position" type="NMTOKEN" use="required">
+	<annotation>
+	 <documentation>The position of the custom tab stop.</documentation>
+	</annotation>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="conditionalStyle">
+  <annotation>
+   <documentation>Used for adding conditions to a current style, to create dynamic styles.
+	  <p/>
+	   Modifies the properties of the parent style, based on various conditions evaluated at fill time. It must be placed inside a top level style.
+   </documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:conditionExpression" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:style"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="conditionExpression">
+  <annotation>
+   <documentation>A boolean expression which indicates if the style properties associated with it should be applied to the parent style.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="subDataset">
+  <annotation>
+   <documentation>Definition of a dataset.  A dataset can be used to feed data not present in the report to charts and crosstabs without using subreports.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element name="propertyExpression" type="jr:datasetPropertyExpressionType" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:scriptlet" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:parameter" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:queryString" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:field" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:sortField" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:variable" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:filterExpression" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:group" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+   <attribute name="name" type="string" use="required">
+  	<annotation>
+   	 <documentation>Name of the dataset.</documentation>
+  	</annotation>  
+   </attribute>
+   <attribute name="scriptletClass" type="string" use="optional">
+  	<annotation>
+   	 <documentation>Indicates which class implements the scriptlets functionality for this dataset. The specified class must be a subclass of <code>JRAbstractScriptlet</code> class. If omitted, an instance of <code>JRDefaultScriptlet</code> will be created.</documentation>
+  	</annotation>  
+   </attribute>
+   <attribute name="resourceBundle" type="string" use="optional">
+  	<annotation>
+   	 <documentation>The base name of the dataset associated resource bundle.</documentation>
+  	</annotation>  
+   </attribute>
+   <attribute name="whenResourceMissingType" use="optional" default="Null">
+  	<annotation>
+   	 <documentation>Allows customizing the way the engine deals with missing resources in the resource bundle.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Null">
+	  	<annotation>
+	   	 <documentation>Null is returned for the missing resource.</documentation>
+	  	</annotation>  
+      </enumeration>
+      <enumeration value="Empty">
+	  	<annotation>
+	   	 <documentation>An empty string is returned for the missing resource.</documentation>
+	  	</annotation>  
+      </enumeration>
+      <enumeration value="Key">
+	  	<annotation>
+	   	 <documentation>The key is returned for the missing resources.</documentation>
+	  	</annotation>  
+      </enumeration>
+      <enumeration value="Error">
+	  	<annotation>
+	   	 <documentation>An exception is thrown when the resource with the specified key is missing.</documentation>
+	  	</annotation>  
+      </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="uuid" type="string" use="optional">
+	<annotation>
+	 <documentation>This attribute is auto-generated and is used to uniquely identify subdatasets.</documentation>
+	</annotation>
+   </attribute>  
+  </complexType>
+ </element>
+
+ <element name="scriptlet">
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:scriptletDescription" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="name" type="string" use="required"/>
+   <attribute name="class" type="string" use="required"/>
+  </complexType>
+ </element>
+
+ <element name="scriptletDescription">
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="parameter">
+  <annotation>
+   <documentation>Represents the definition of a report parameter. Parameters are very useful for passing data to the report engine and can be used in the expressions or in the query string of the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:parameterDescription" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:defaultValueExpression" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="name" type="string" use="required">
+  	<annotation>
+   	 <documentation>Name of the parameter.</documentation>
+  	</annotation>  
+   </attribute>
+   <attribute name="class" type="string" use="optional" default="java.lang.String">
+  	<annotation>
+   	 <documentation>Class of the parameter values.</documentation>
+  	</annotation>  
+   </attribute>
+   <attribute name="nestedType" type="string" use="optional">
+  	<annotation>
+   	 <documentation>Type of the nested elements, if the parameter's value is a collection</documentation>
+  	</annotation>  
+   </attribute>
+   <attribute name="isForPrompting" use="optional" default="true">
+  	<annotation>
+   	 <documentation>Optional flag that might be used by the parent application to prompt the user for the parameter value.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="evaluationTime" use="optional">
+  	<annotation>
+   	 <documentation>Specifies when the default value expression of a parameter is evaluated.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Early">
+	  	<annotation>
+	   	 <documentation>Evaluate the parameter default value expression before parameter contributors.</documentation>
+	  	</annotation>  
+      </enumeration>
+      <enumeration value="Late">
+	  	<annotation>
+	   	 <documentation>Evaluate the parameter default value expression after parameter contributors.</documentation>
+	  	</annotation>  
+      </enumeration>
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="parameterDescription">
+  <annotation>
+   <documentation>Can be used to specify a short text description for the parameter and is useful especially when prompting for the user to supply a value for this parameter at runtime.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="defaultValueExpression">
+  <annotation>
+   <documentation>Specifies the parameter default value to use when not supplied by the parent application at runtime.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="queryString">
+  <annotation>
+   <documentation>Contains the SQL query that will be used to retrieve the data needed to fill the report.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+   <attribute name="language" type="string" use="optional" default="sql">
+   	<annotation>
+   	 <documentation>Specifies the query language.
+	  <p/>
+		Based on the query language, a corresponding
+		<code>net.sf.jasperreports.engine.query.QueryExecuterFactory</code> is used to create
+		<code>net.sf.jasperreports.engine.query.JRQueryExecuter</code> instance.
+		The query executer is responsible for executing the query and creating a <code>JRDataSource</code> from the result.
+	  <p/>
+		A executer for a query language is registered using a JR propery named
+		<code>net.sf.jasperreports.query.executer.factory.&lt;language&gt;</code></documentation>
+   	</annotation>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="field">
+  <annotation>
+   <documentation>Represents the definition of a data field that will store values retrieved from the data source of the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:propertyExpression" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:fieldDescription" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="name" type="string" use="required">
+  	<annotation>
+   	 <documentation>Name of the field.</documentation>
+  	</annotation>  
+   </attribute>   
+   <attribute name="class" type="string" use="optional" default="java.lang.String">
+  	<annotation>
+   	 <documentation>Class of the field values.</documentation>
+  	</annotation>  
+   </attribute>   
+  </complexType>
+ </element>
+
+ <element name="fieldDescription">
+  <annotation>
+   <documentation>Can be used to specify a short text description for the field and is useful especially when creating special designed data sources and an extra information is needed in order  to extract the value of the field.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="sortField">
+  <annotation>
+   <documentation>Introduces a field to use for sorting the data source.</documentation>
+  </annotation>  
+  <complexType>
+   <attribute name="name" type="string" use="required">
+  	<annotation>
+   	 <documentation>Name of the report field to use for sorting.</documentation>
+  	</annotation>  
+   </attribute>   
+   <attribute name="order" use="optional" default="Ascending">
+  	<annotation>
+   	 <documentation>The sort order for the field.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Ascending"/>
+      <enumeration value="Descending"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="type" use="optional" default="Field">
+  	<annotation>
+   	 <documentation>The type of the sort field.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Field"/>
+      <enumeration value="Variable"/>
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="variable">
+  <annotation>
+   <documentation>Represents the definition of a report variable. Variables are objects that store the values of their associated expressions or perform various calculations on those expression values. Expressions are java expressions build on top of fields and variables declared in the report. They are evaluated at runtime, when filling the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:variableExpression" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:initialValueExpression" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="name" type="string" use="required">
+  	<annotation>
+   	 <documentation>Name of the variable.</documentation>
+  	</annotation>  
+   </attribute>   
+   <attribute name="class" type="string" use="optional" default="java.lang.String">
+  	<annotation>
+   	 <documentation>Class of the variable values.</documentation>
+  	</annotation>  
+   </attribute>   
+   <attribute name="resetType" use="optional" default="Report">
+  	<annotation>
+   	 <documentation>Reset level for variables that perform calculations.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None">
+	  	<annotation>
+	   	 <documentation>Variable is never initialized using the initial value expression and only holds the values obtained by evaluating its main expression.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Report">
+	  	<annotation>
+	   	 <documentation>Variable is initialized only once, at the beginning of the report.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Page">
+	  	<annotation>
+	   	 <documentation>Variable is initialized at the beginning of each page.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Column">
+	  	<annotation>
+	   	 <documentation>Variable is initialized at the beginning of each column.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Group">
+	  	<annotation>
+	   	 <documentation>Variable is initialized when the group specified by the <code>resetGroup</code> attribute changes.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="resetGroup" type="string" use="optional">
+  	<annotation>
+   	 <documentation>Name of the group at which the variable is reinitialized, when <code>resetType</code> is "Group".</documentation>
+  	</annotation>  
+   </attribute>   
+   <attribute name="incrementType" use="optional" default="None">
+  	<annotation>
+   	 <documentation>Increment level for variables that perform calculations.</documentation>
+  	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="None">
+	  	<annotation>
+	   	 <documentation>Variable is incremented with every record in the data source.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Report">
+	  	<annotation>
+	   	 <documentation>Variable is incremented only once, at the end of the report.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Page">
+	  	<annotation>
+	   	 <documentation>Variable is incremented at the end of each page.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Column">
+	  	<annotation>
+	   	 <documentation>Variable is incremented at the end of each column.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Group">
+	  	<annotation>
+	   	 <documentation>Variable is incremented when the group specified by the <code>incrementGroup</code> attribute changes.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="incrementGroup" type="string" use="optional">
+  	<annotation>
+   	 <documentation>Name of the group at which the variable is incremented, when <code>incrementType</code> is "Group".</documentation>
+  	</annotation>
+   </attribute>  
+   <attribute name="calculation" use="optional" default="Nothing">
+  	<annotation>
+   	 <documentation>Calculation to perform on the variable expression when filling the report.</documentation>
+  	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Nothing">
+	  	<annotation>
+	   	 <documentation>No calculations are performed.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Count">
+	  	<annotation>
+	   	 <documentation>Variable stores the number of the not null values encountered for the variable expression.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="DistinctCount">
+	  	<annotation>
+	   	 <documentation>Variable stores the number of distinct not null values encountered for the variable expression.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Sum">
+	  	<annotation>
+	   	 <documentation>Variable stores the sum of the not null values encountered for the variable expression. Numeric variables only.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Average">
+	  	<annotation>
+	   	 <documentation>Variable stores the average of the not null values encountered for the variable expression. Numeric variables only.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Lowest">
+	  	<annotation>
+	   	 <documentation>Variable stores the lowest value encountered for the variable expression.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Highest">
+	  	<annotation>
+	   	 <documentation>Variable stores the highest value encountered for the variable expression.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="StandardDeviation">
+	  	<annotation>
+	   	 <documentation>Variable stores the standard deviation of the not null values encountered for the variable expression. Numeric variables only.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="Variance">
+	  	<annotation>
+	   	 <documentation>Variable stores the variance of the not null values encountered for the variable expression. Numeric variables only.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="System">
+	  	<annotation>
+	   	 <documentation>Variable stores a system (custom) calculated value.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="First">
+	  	<annotation>
+	   	 <documentation>Variable stores the first value encountered and ignores subsequent values.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="incrementerFactoryClass" type="string" use="optional">
+ 	<annotation>
+  	 <documentation>The name of a class that implements the <code>net.sf.jasperreports.engine.fill.JRIncrementerFactory</code> interface to use when creating the incrementer instance for this variable. Incrementers are objects that implement the <code>net.sf.jasperreports.engine.fill.JRIncrementer</code> interface and handle the incremental calculation performed on the variable's current value with every iteration in the data source.</documentation>
+ 	</annotation>
+   </attribute> 
+  </complexType>
+ </element>
+
+ <element name="variableExpression">
+  <annotation>
+   <documentation>Definition of the expression associated with the variable. The value of this expression will be calculated at runtime and will represent the value of the corresponding variable or it will be used in calculation to obtain the value of the calculated variable.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="initialValueExpression">
+  <annotation>
+   <documentation>Definition of the expression that will be used to calculate the initial value of the variable, before any calculations are made.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="filterExpression">
+  <annotation>
+   <documentation>Boolean expression used to filter the rows of a data source.
+	 <p>
+	 This expression is used to filter the rows of the data source that this dataset will iterate on.
+	 </p>
+	 <p><![CDATA[
+	 This expression (if not null) is evaluated immediately after a new row is produced by the data source.
+	 The evaluation is performed using field and variable values corresponding to the new row. 
+	 When the result of the evaluation is <code>Boolean.TRUE</code> the row gets processed by the report filling engine.
+	 When the result is null or <code>Boolean.FALSE</code>, the current row will be skipped and the datasource will be asked for the next row.
+	 ]]></p></documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="group">
+  <annotation>
+   <documentation>Definition of a group on the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:groupExpression" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:groupHeader" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:groupFooter" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="name" type="string" use="required">
+ 	<annotation>
+  	 <documentation>Name of the group.</documentation>
+ 	</annotation>
+   </attribute> 
+   <attribute name="isStartNewColumn" use="optional" default="false">
+ 	<annotation>
+  	 <documentation>Flag that signals if the group header should be printed always on a new column.</documentation>
+ 	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	  	<annotation>
+	   	 <documentation>Group header section is printed always on a new column.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="false">
+	  	<annotation>
+	   	 <documentation>Group header section is printed on the current column, if there is enough space.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isStartNewPage" use="optional" default="false">
+ 	<annotation>
+  	 <documentation>Flag that signals if the group header should be printed always on a new page.</documentation>
+ 	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	  	<annotation>
+	   	 <documentation>Group header section is printed always on a new page.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="false">
+	  	<annotation>
+	   	 <documentation>Group header section is printed on the current page, if there is enough space.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isResetPageNumber" use="optional" default="false">
+ 	<annotation>
+  	 <documentation>Flag that signals if the group header should be printed always on a new page, along with the re-initialization of the page number.</documentation>
+ 	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	  	<annotation>
+	   	 <documentation>Group header section is printed always on a new page and the page number is reinitialized.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="false">
+	  	<annotation>
+	   	 <documentation>Group header section is printed accordingly with the <code>isStartNewPage</code> attribute and the page number is not affected.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isReprintHeaderOnEachPage" use="optional" default="false">
+ 	<annotation>
+  	 <documentation>Flag that signals if the group header should be reprinted at the beginning of each page.</documentation>
+ 	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	  	<annotation>
+	   	 <documentation>Group header section is reprinted always at the beginning of a new page.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="false">
+	  	<annotation>
+	   	 <documentation>Group header section is not reprinted at the beginning of a new page.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="minHeightToStartNewPage" type="NMTOKEN" use="optional" default="0">
+ 	<annotation>
+  	 <documentation>Minimum amount of vertically space needed at the bottom of the column in order to place the group header on the current column.</documentation>
+ 	</annotation>
+   </attribute>
+   <attribute name="footerPosition" use="optional" default="Normal">
+	<annotation>
+	 <documentation>Specifies how the group footer section behaves with regards to its position on the current page.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Normal">
+		<annotation>
+		 <documentation>The group footer section is rendered at normal position, just right after the last detail or right after the nested group footer section.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="StackAtBottom">
+		<annotation>
+		 <documentation>The group footer section is rendered at bottom of the current page, provided that an inner group having this value would force outer group footers to stack at the bottom of the current page, regardless of the outer group footer setting.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="ForceAtBottom">
+		<annotation>
+		 <documentation>The group footer section is rendered at bottom of the current page, provided that an inner group having this value would render its footer right at the bottom of the page, forcing the outer group footers to render on the next page.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="CollateAtBottom">
+		<annotation>
+		 <documentation>The group footer section is rendered at bottom of the current page, provided that the outer footers have a similar footer display option to render at the page bottom as well, because otherwise, they cannot be forced to change their behavior in any way.</documentation>
+		</annotation>
+	  </enumeration>  
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="keepTogether" use="optional" default="false">
+ 	<annotation>
+  	 <documentation>Flag that prevents the group from splitting on two separate pages/columns, but only on the first break attempt.</documentation>
+ 	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+	  	<annotation>
+	   	 <documentation>Group can split across two separate pages/column at any moment.</documentation>
+	  	</annotation>
+	  </enumeration> 
+      <enumeration value="false">
+	  	<annotation>
+	   	 <documentation>Group is moved onto a new new page/column, before being split.</documentation>
+	  	</annotation>
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="groupExpression">
+  <annotation>
+   <documentation>Specifies the expression that will be evaluated at runtime to determine the group ruptures.</documentation>
+  </annotation>  
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="groupHeader">
+  <annotation>
+   <documentation>Contains the definition of the header section for this group.</documentation>
+  </annotation>  
+  <complexType>
+   <choice minOccurs="0" maxOccurs="1">
+    <element ref="jr:band" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:part" minOccurs="0" maxOccurs="unbounded"/>
+   </choice>
+  </complexType>
+ </element>
+
+ <element name="groupFooter">
+  <annotation>
+   <documentation>Contains the definition of the footer section for this group.</documentation>
+  </annotation>  
+  <complexType>
+   <choice minOccurs="0" maxOccurs="1">
+    <element ref="jr:band" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:part" minOccurs="0" maxOccurs="unbounded"/>
+   </choice>
+  </complexType>
+ </element>
+
+ <element name="background">
+  <annotation>
+   <documentation>Definition of the page background section for this report. The background section is displayed on every page and cannot overflow to the next page. Elements placed on this section are evaluated at page initialization time and are displayed in the back. All other page elements are displayed on top of the background elements. This section allows creating watermark or other similar effects in documents.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="title">
+  <annotation>
+   <documentation>Definition of the title section for this report. The title section appears only once at the beginning of the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="pageHeader">
+  <annotation>
+   <documentation>Definition of the page header section for this report. The page header is printed at the beginning of each page on the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="columnHeader">
+  <annotation>
+   <documentation>Definition of the column header section for this report. The column header is printed at the beginning of each column on the report. If the report's column count is 1, column  header and footer sections are ignored.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="detail">
+  <annotation>
+   <documentation>Definition of a detail band for this report. A detail band is repeated for each line of data supplied by the report's data source. There can be multiple detail bands in a report.</documentation>
+  </annotation>  
+  <complexType>
+   <choice minOccurs="0" maxOccurs="1">
+    <element ref="jr:band" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:part" minOccurs="0" maxOccurs="unbounded"/>
+   </choice>
+  </complexType>
+ </element>
+
+ <element name="columnFooter">
+  <annotation>
+   <documentation>Definition of the column footer section for this report. The column footer is printed at the bottom of each column on the report. If the report's column count is 1, column header   and footer sections are ignored.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="pageFooter">
+  <annotation>
+   <documentation>Definition of the page footer section for this report. The page footer is printed at the bottom of each page on the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="lastPageFooter">
+  <annotation>
+   <documentation>The page footer section to use on the last page instead of the normal page footer. This might not be the very last page of the document in case the summary section is also present. This section is sometimes useful when summary information has to be displayed at the bottom of the last page.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="summary">
+  <annotation>
+   <documentation>Definition of the summary section for this report. The summary section is printed only once at the end of the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="noData">
+  <annotation>
+   <documentation>Definition of the noData section for this report. The noData section is printed only if whenNoDataType attribute is set to "NoDataSection".</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:band" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name="band">
+  <annotation>
+   <documentation>Generic definition of a report section.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:printWhenExpression" minOccurs="0" maxOccurs="1"/>
+    <choice minOccurs="0" maxOccurs="unbounded">
+     <element ref="jr:break"/>
+     <element ref="jr:line"/>
+     <element ref="jr:rectangle"/>
+     <element ref="jr:ellipse"/>
+     <element ref="jr:image"/>
+     <element ref="jr:staticText"/>
+     <element ref="jr:textField"/>
+     <element ref="jr:subreport"/>
+     <element ref="jr:pieChart"/>
+     <element ref="jr:pie3DChart"/>
+     <element ref="jr:barChart"/>
+     <element ref="jr:bar3DChart"/>
+     <element ref="jr:xyBarChart"/>
+     <element ref="jr:stackedBarChart"/>
+     <element ref="jr:stackedBar3DChart"/>
+     <element ref="jr:lineChart"/>
+     <element ref="jr:xyLineChart"/>
+     <element ref="jr:areaChart"/>
+     <element ref="jr:xyAreaChart"/>
+     <element ref="jr:scatterChart"/>
+     <element ref="jr:bubbleChart"/>
+     <element ref="jr:timeSeriesChart"/>
+     <element ref="jr:highLowChart"/>
+     <element ref="jr:candlestickChart"/>
+     <element ref="jr:meterChart"/>
+     <element ref="jr:thermometerChart"/>
+     <element ref="jr:multiAxisChart"/>
+     <element ref="jr:stackedAreaChart"/>
+     <element ref="jr:ganttChart"/>
+     <element ref="jr:elementGroup"/>
+     <element ref="jr:crosstab"/>
+     <element ref="jr:frame"/>
+     <element ref="jr:componentElement"/>
+     <element ref="jr:genericElement"/>
+    </choice>
+    <element name="returnValue" type="jr:expressionReturnValue" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+   <attribute name="height" type="NMTOKEN" use="optional" default="0">
+	<annotation>
+	 <documentation>Height of the band.</documentation>
+	</annotation>  
+   </attribute>
+   <attribute name="isSplitAllowed" use="optional">
+	<annotation>
+	 <documentation><i>Deprecated</i>. Replaced by attribute <code>splitType</code>. Flag that indicates if the band is allowed to split when it stretches.</documentation>
+	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+		<annotation>
+		 <documentation>Page breaks are accepted within this band.</documentation>
+		</annotation> 
+	  </enumeration> 
+      <enumeration value="false">
+		<annotation>
+		 <documentation>When the band stretches and it does not fit on the current page, the content of the band will be transferred on the next new page. On this new page the flag will be ignored since the band has to be displayed even there is not enough space to acquire the stretch.</documentation>
+		</annotation> 
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="splitType" use="optional">
+	<annotation>
+	 <documentation>Specifies the band split behavior.</documentation>
+	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Stretch">
+		<annotation>
+		 <documentation>The band is allowed to split, but never within its declared height. This means the band splits only when its content stretches.</documentation>
+		</annotation> 
+	  </enumeration> 
+      <enumeration value="Prevent">
+		<annotation>
+		 <documentation>Prevents the band from splitting on first break attempt. On subsequent pages/columns, the band is allowed to split, to avoid infinite loops.</documentation>
+		</annotation> 
+	  </enumeration> 
+      <enumeration value="Immediate">
+		<annotation>
+		 <documentation>The band is allowed to split anywhere, as early as needed, but not before at least one element being printed on the current page/column.</documentation>
+		</annotation> 
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="part">
+  <annotation>
+   <documentation>Generic definition of a report part.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:printWhenExpression" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:partNameExpression" minOccurs="0" maxOccurs="1"/>
+    <element ref="jr:partComponent"/>
+   </sequence>
+   <attribute name="uuid" type="string" use="optional">
+	<annotation>
+	 <documentation>This attribute is auto-generated and is used to uniquely identify parts.</documentation>
+	</annotation>
+   </attribute>  
+   <attribute name="evaluationTime" use="optional">
+     <annotation>
+       <documentation>Determines the time at which the part is to be evaluated.</documentation>
+     </annotation>
+     <simpleType>
+       <restriction base="string">
+         <enumeration value="Now">
+           <annotation>
+             <documentation>The part is to be evaluated immediately.</documentation>
+           </annotation>
+         </enumeration>
+         <enumeration value="Report">
+           <annotation>
+             <documentation>The part is to be evaluated when the report ends.</documentation>
+           </annotation>
+         </enumeration>
+         <enumeration value="Group">
+           <annotation>
+             <documentation>The part is to be evaluated when a group breaks.</documentation>
+           </annotation>
+         </enumeration>
+       </restriction>
+     </simpleType>
+   </attribute>  
+   <attribute name="evaluationGroup" type="string" use="optional">
+     <annotation>
+       <documentation>Specifies the group at which to evaluate the part when <code>evaluationTime</code> is Group.</documentation>
+     </annotation>
+   </attribute>  
+  </complexType>
+ </element>
+
+ <element name="partNameExpression">
+  <annotation>
+   <documentation>An expression that will provide a name for a report part.</documentation>
+  </annotation>
+  <complexType mixed="true">
+  </complexType>
+ </element>
+
+ <element name="partComponent" type="jr:partComponentType" abstract="true">
+  <annotation>
+   <documentation></documentation>
+  </annotation>
+ </element>
+  
+ <complexType name="partComponentType" abstract="true">
+  <annotation>
+   <documentation></documentation>
+  </annotation>
+ </complexType>
+
+ <element name="break">
+  <annotation>
+   <documentation>Introduces a page break or column break</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:reportElement"/>
+   </sequence>
+   <attribute name="type" use="optional" default="Page">
+	<annotation>
+	 <documentation>Specifies the type of the break element.</documentation>
+	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Page">
+		<annotation>
+		 <documentation>Page break.</documentation>
+		</annotation> 
+	  </enumeration> 
+      <enumeration value="Column">
+		<annotation>
+		 <documentation>Column break.</documentation>
+		</annotation> 
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="line">
+  <annotation>
+   <documentation>Definition of a line object.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:reportElement"/>
+    <element ref="jr:graphicElement" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="direction" use="optional" default="TopDown">
+	<annotation>
+	 <documentation>Lines are drawn as diagonals of the rectangle defined by the report element properties. This attribute specifies which of the two diagonals should be drawn.</documentation>
+	</annotation>  
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="TopDown">
+		<annotation>
+		 <documentation>The diagonal that starts in the top-left corner of the rectangle will be drawn.</documentation>
+		</annotation> 
+	  </enumeration> 
+      <enumeration value="BottomUp">
+		<annotation>
+		 <documentation>The diagonal that starts in the bottom-left corner of the rectangle will be drawn.</documentation>
+		</annotation> 
+	  </enumeration> 
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name="reportElement">
+  <annotation>
+   <documentation>Element used to specify the common properties of an object on the report.</documentation>
+  </annotation>  
+  <complexType>
+   <sequence>
+    <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:propertyExpression" minOccurs="0" maxOccurs="unbounded"/>
+    <element ref="jr:printWhenExpression" minOccurs="0" maxOccurs="1"/>
+   </sequence>
+   <attribute name="uuid" type="string" use="optional">
+	<annotation>
+	 <documentation>This attribute is auto-generated and is used to uniquely identify elements across multiple report templates.</documentation>
+	</annotation>
+   </attribute>  
+   <attribute name="key" type="string" use="optional">
+	<annotation>
+	 <documentation>This attribute is used to identify band elements by their "key" when wanting to alter their settings at runtime. The key value must be unique for elements within report band.</documentation>
+	</annotation>
+   </attribute>  
+   <attribute name="style" type="string" use="optional">
+	<annotation>
+	 <documentation>Name of the report level style to use as base style (see <elem>style</elem> element).</documentation>
+	</annotation>
+   </attribute>  
+   <attribute name="positionType" use="optional" default="FixRelativeToTop">
+	<annotation>
+	 <documentation>Specifies the object position when the report section is affected by stretch.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Float">
+		<annotation>
+		 <documentation>The element moves relative to the size of the surrounding elements.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="FixRelativeToTop">
+		<annotation>
+		 <documentation>The element maintains its position relative to the top of the band.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="FixRelativeToBottom">
+		<annotation>
+		 <documentation>The element maintains its position relative to the bottom of the band.</documentation>
+		</annotation>
+	  </enumeration>  
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="stretchType" use="optional" default="NoStretch">
+	<annotation>
+	 <documentation>Specifies the element stretch behavior relative to its element group siblings or element container stretch.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="NoStretch">
+		<annotation>
+		 <documentation>The element won't stretch vertically beyond its natural stretch height, when the container stretches to display other elements.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="RelativeToTallestObject">
+		<annotation>
+		 <documentation><i>Deprecated</i>. Replaced by ElementGroupHeight value.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="RelativeToBandHeight">
+		<annotation>
+		 <documentation><i>Deprecated</i>. Replaced by ContainerHeight value.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="ElementGroupBottom">
+		<annotation>
+		 <documentation>The element will stretch to accommodate the overall natural growth of its group, but also taking into account the shifting Y position of the element within its group. See the <elem>elementGroup</elem> element, to see how to group elements.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="ElementGroupHeight">
+		<annotation>
+		 <documentation>The element will stretch to accommodate the overall natural growth of its group, without taking into account the shifting Y position of the element within its group. See the <elem>elementGroup</elem> element, to see how to group elements.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="ContainerBottom">
+		<annotation>
+		 <documentation>The element will stretch to fit the container height, while taking into account its new Y position. This results in the element preserving its distance to the container's bottom edge.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="ContainerHeight">
+		<annotation>
+		 <documentation>The element will stretch to fit the container height, but without taking into account its new Y position. This might results in the element being shifted up (due to collapsing elements above) or down (due to stretching elements above that push it downards) relative to the container bottom edge. In case the element its already pushed downwards, the additional stretch imposed by the container might actually throw it beyond the container's bottom edge, in which case the element will not render at all.</documentation>
+		</annotation>
+	  </enumeration>  
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="isPrintRepeatedValues" use="optional" default="true">
+	<annotation>
+	 <documentation>This flag allows suppressing the repeating values for the dynamic elements such as text fields and image fields and to fully customize the behavior of the static elements like rectangles, lines, ellipses and static texts.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="true">
+		<annotation>
+		 <documentation>Dynamic elements will print even if their values repeat. Static elements will appear every time the band that contains them is started.</documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="false">
+		<annotation>
+		 <documentation>Suppresses the repeated values for the dynamic elements. The static elements will print only according to the other 3 attributes: <code>isPrintInFirstWholeBand</code>, <code>isPrintWhenDetailOverflows</code>, <code>printWhenGroupChanges</code>.</documentation>
+		</annotation>
+	  </enumeration>  
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name="mode" use="optional">
+	<annotation>
+	 <documentation>Specifies whether the background of an object is transparent or opaque.</documentation>
+	</annotation>
+    <simpleType>
+     <restriction base="string">
+      <enumeration value="Opaque">
+		<annotation>
+		 <documentation></documentation>
+		</annotation>
+	  </enumeration>  
+      <enumeration value="Transparent">
+		<annotation>
+		 <do

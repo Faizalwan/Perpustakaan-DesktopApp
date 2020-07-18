@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="37fa1b2c-7757-40f7-b8a5-6c1d7e3b9016">
+	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     buku.`kode_buku` AS buku_kode_buku,
+     buku.`judul` AS buku_judul,
+     buku.`penulis` AS buku_penulis,
+     buku.`penerbit` AS buku_penerbit,
+     buku.`tahun_terbit` AS buku_tahun_terbit,
+     buku.`status` AS buku_status
+FROM
+     `buku` buku]]>
+	</queryString>
+	<field name="buku_kode_buku" class="java.lang.String"/>
+	<field name="buku_judul" class="java.lang.String"/>
+	<field name="buku_penulis" class="java.lang.String"/>
+	<field name="buku_penerbit" class="java.lang.String"/>
+	<field name="buku_tahun_terbit" class="java.lang.String"/>
+	<field name="buku_status" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-20" width="596" height="115" backcolor="#201950" uuid="d003ba06-453b-4f0b-a640-291b5f386bf6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="41" width="414" height="33" forecolor="#FFFFFF" uuid="05ba10b5-9d97-4bc9-ab5a-dc5d8f7092b4"/>
+				<textElement>
+					<font fontName="Poppins SemiBold" size="20"/>
+				</textElement>
+				<text><![CDATA[DATA BUKU PERPUSTAKAAN UNIKOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="-10" width="457" height="62" forecolor="#FFFFFF" uuid="1e536b07-7f82-44c9-8947-15edf5adfcec"/>
+				<textElement>
+					<font fontName="Poppins SemiBold" size="40" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="59" splitType="Stretch">
+			<rectangle>
+				<reportElement x="59" y="39" width="145" height="20" forecolor="#333333" backcolor="#3366FF" uuid="34b3a09c-c6f3-4b34-9c15-3cee94ec46ee"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="204" y="39" width="112" height="20" forecolor="#333333" backcolor="#3366FF" uuid="6d3378de-79c8-4909-87dc-c051773ca426"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-20" y="39" width="79" height="20" forecolor="#333333" backcolor="#3366FF" uuid="1bf22bbb-a86b-4e89-9363-00ff08de82af"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="39" width="71" height="20" forecolor="#333333" backcolor="#3366FF" uuid="181780c4-91fc-4983-850d-bc07cf39ecbf"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="316" y="39" width="112" height="20" forecolor="#333333" backcolor="#3366FF" uuid="efc1a3fe-546d-45b5-a1f8-386332d1ef41"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-20" y="39" width="79" height="20" forecolor="#FFFFFF" uuid="385dd9aa-397f-4403-aef4-8fe3dd047f7d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[kode buku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="59" y="39" width="145" height="20" forecolor="#FFFFFF" uuid="5f14834c-7cd5-4040-992a-0bc02c0a7918"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[Judul Buku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="39" width="112" height="20" forecolor="#FFFFFF" uuid="d78e9270-0a43-45b9-8413-4a32c152a5dd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[Penulis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="39" width="112" height="20" forecolor="#FFFFFF" uuid="1e744118-b8f6-4b40-9922-fccb8de665cc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[Penerbit]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="499" y="39" width="77" height="20" forecolor="#333333" backcolor="#3366FF" uuid="afa67576-59bb-4dd4-b90b-e7d04acc2f0a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="428" y="39" width="71" height="20" forecolor="#FFFFFF" uuid="c3c8fc69-8add-4d45-bd36-610b896cf45f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[tahun]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="39" width="77" height="20" forecolor="#FFFFFF" uuid="131a31fe-90a0-45b6-8828-093f2598e2ee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="0" width="79" height="20" uuid="dbdd5d54-e428-47d4-8910-0bd59b64fab8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="59" y="0" width="145" height="20" uuid="a3f8b5bb-2e0b-4951-8bfc-bddd9f8b209a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="204" y="0" width="112" height="20" uuid="2a1c1226-6ba4-4383-a627-c4b8482837b7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="316" y="0" width="112" height="20" uuid="fd48432c-5a32-4b5f-9d2a-b3d2444f584f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="0" width="71" height="20" uuid="25433866-6357-442b-99eb-3b0cc09a68bd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="499" y="0" width="77" height="20" uuid="57509425-cecd-4331-8087-4fe381b5e254"/>
+			</rectangle>
+			<textField>
+				<reportElement x="-10" y="0" width="69" height="20" uuid="eb890387-c1e4-49a6-8611-9d656f2e3a1c"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_kode_buku}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="0" width="132" height="20" uuid="4339ae3c-4067-4c6b-878b-d85e2ebfa108"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_judul}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="100" height="20" uuid="2ae6b580-a28b-4d88-8320-0bdd27ed7194"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_penulis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="100" height="20" uuid="ae8a3186-44bc-4c57-b4cb-ea9abc918085"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_penerbit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="0" width="61" height="20" uuid="1d81e295-dc47-468a-9b09-9b93fedcb550"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_tahun_terbit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="0" width="66" height="20" uuid="3b0900b5-2526-4214-a3f0-1887d17f9020"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buku_status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="46" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="0" width="596" height="46" backcolor="#000033" uuid="18301fa5-50bc-4109-870e-03e2f540dc88"/>
+			</rectangle>
+			<textField>
+				<reportElement x="435" y="15" width="80" height="20" forecolor="#FFFFFF" uuid="1a425c42-509c-4169-8fc4-fed47787e92c"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="15" width="40" height="20" forecolor="#FFFFFF" uuid="ef772475-af5f-4b2d-a020-ca975356c263"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="15" width="100" height="20" forecolor="#FFFFFF" uuid="80263b53-8c24-45d1-82df-2dd41ecf5ded"/>
+				<textElement>
+					<font fontName="Poppins"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
